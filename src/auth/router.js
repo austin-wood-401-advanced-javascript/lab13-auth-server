@@ -32,4 +32,18 @@ authRouter.post('/signin', auth(), (req, res, next) => {
   res.send(req.token);
 });
 
+authRouter.get('/public-stuff', (req,res,next) => {
+  res.status(200).send('Welcome Everyone!');
+});
+
+authRouter.get('/hidden-stuff', auth(), (req,res,next) => {
+  res.status(200).send('You\'re Valid!');
+});
+
+authRouter.get('/something-to-read', auth('read'), (req,res,next) => {
+  
+});
+
+
+
 module.exports = authRouter;
