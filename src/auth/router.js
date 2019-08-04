@@ -8,7 +8,7 @@ const auth = require('./middleware.js');
 
 authRouter.post('/roles', (req,res,next) => {
   let role = new Role(req.body);
-  console.log('HURRRR',req.body);
+  console.log(role);
   role.save()
     .then( (role) => {
       res.send(role);
@@ -41,9 +41,28 @@ authRouter.get('/hidden-stuff', auth(), (req,res,next) => {
 });
 
 authRouter.get('/something-to-read', auth('read'), (req,res,next) => {
-  
+  res.status(200).send('You Can Read!');
 });
 
+authRouter.post('/create-a-thing'), auth('create'), (req,res,next) => {
+  res.status(200).send('You Can Make Things!');
+};
+
+authRouter.put('/update'), auth('update'), (req,res,next) => {
+  res.status(200).send('You Can Update Things!');
+};
+
+authRouter.patch('/jp'), auth('update'), (req,res,next) => {
+  res.status(200).send('You Can Update Things!');
+};
+
+authRouter.delete('/bye-bye'), auth('delete'), (req,res,next) => {
+  res.status(200).send('It\'s gone. Forever.');
+};
+
+authRouter.get('/everything'), auth('superuser'), (req,res,next) => {
+  res.status(200).send('You Have All The Power.');
+};
 
 
 module.exports = authRouter;

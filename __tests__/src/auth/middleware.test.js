@@ -62,7 +62,7 @@ describe('Auth Middleware', () => {
       let next = jest.fn();
       let middleware = auth;
 
-      return middleware(req,res,next)
+      return middleware()
         .then( () => {
           cachedToken = req.token;
           expect(next).toHaveBeenCalledWith();
