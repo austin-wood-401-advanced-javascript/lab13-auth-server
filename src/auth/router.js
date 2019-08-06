@@ -1,5 +1,6 @@
 'use strict';
 
+let blacklist = [];
 const express = require('express');
 const authRouter = express.Router();
 const Role = require('./roles-model.js');
@@ -28,6 +29,14 @@ authRouter.post('/signup', (req, res, next) => {
 });
 
 authRouter.post('/signin', auth(), (req, res, next) => {
+  res.cookie('auth', req.token);
+  res.send(req.token);
+});
+
+authRouter.post('/onetime', auth(), (req, res, next) => {
+  if (blacklist.includes(req.headers.authorization))
+  { res.send('Token Expired');}
+  blacklist.push(req.headers.authorization);
   res.cookie('auth', req.token);
   res.send(req.token);
 });
