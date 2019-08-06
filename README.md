@@ -12,7 +12,7 @@
 
 
 #### To test run:
-**signing up users: 
+##signing up users: 
 * echo '{"username":"<name>", "password":"<password>", "role":"editor"}'| http post https://auth-server-aw.herokuapp.com/signup
 
 **basic sign-in: 
